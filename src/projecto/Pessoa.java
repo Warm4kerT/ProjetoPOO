@@ -3,14 +3,13 @@ package projecto;
 import java.io.Serializable;
 
 public class Pessoa implements Serializable {
-    private Contador id;
     private String nome, funcao;
-    private int idade;
+    private int idade, id;
     private double salario;
     private Data contrato;
 
-    public Pessoa(String nome, String funcao, int idade, double salario, Data contrato) {
-        this.id.incConta();
+    public Pessoa(int id, String nome, String funcao, int idade, double salario, Data contrato) {
+        this.id=id;
         this.nome = nome;
         this.funcao = funcao;
         this.idade = idade;
@@ -19,7 +18,7 @@ public class Pessoa implements Serializable {
     }
     
     public Pessoa(){
-        this.id.incConta();
+        this.id=0;
         this.nome = "";
         this.funcao = "";
         this.idade = 0;
@@ -28,7 +27,11 @@ public class Pessoa implements Serializable {
     }
     
     public int getId(){
-        return this.id.getConta();
+        return this.id;
+    }
+    
+    public void setId(int id){
+        this.id=(id);
     }
 
     public String getNome() {
@@ -73,21 +76,21 @@ public class Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return "Pessoa{" + "nome=" + nome + ", funcao=" + funcao + ", idade=" + idade + ", salario=" + salario + ", contrato=" + contrato.toString() + '}';
+        return "Pessoa{" +"ID=" + id + " nome=" + nome + ", funcao=" + funcao + ", idade=" + idade + ", salario=" + salario + ", contrato=" + contrato.toString() + '}';
     }
     
     @Override
     public boolean equals(Object o){
         if(o!=null && this.getClass()==o.getClass()){
             Pessoa x =(Pessoa) o;
-            return (x.nome.equals(this.nome))&&(this.funcao.equals(x.funcao))&&(this.idade==x.idade)&&(this.salario==x.salario)&&(this.contrato.equals(x.contrato));
+            return (x.id==this.id)&&(x.nome.equals(this.nome))&&(this.funcao.equals(x.funcao))&&(this.idade==x.idade)&&(this.salario==x.salario)&&(this.contrato.equals(x.contrato));
         }
         return false;
     } 
     
     @Override
     public Object clone(){
-        Pessoa clone=new Pessoa(this.nome, this.funcao, this.idade, this.salario, this.contrato);
+        Pessoa clone=new Pessoa(this.id, this.nome, this.funcao, this.idade, this.salario, this.contrato);
         return clone;
     }
     
