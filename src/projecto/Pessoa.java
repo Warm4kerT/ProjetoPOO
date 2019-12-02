@@ -1,13 +1,16 @@
 
 package projecto;
-/*CONTADOR??? Com ID*/
-public class Pessoa {
+import java.io.Serializable;
+
+public class Pessoa implements Serializable {
+    private Contador id;
     private String nome, funcao;
     private int idade;
     private double salario;
     private Data contrato;
 
     public Pessoa(String nome, String funcao, int idade, double salario, Data contrato) {
+        this.id.incConta();
         this.nome = nome;
         this.funcao = funcao;
         this.idade = idade;
@@ -16,11 +19,16 @@ public class Pessoa {
     }
     
     public Pessoa(){
+        this.id.incConta();
         this.nome = "";
         this.funcao = "";
         this.idade = 0;
         this.salario = 0.0;
         this.contrato = new Data();
+    }
+    
+    public int getId(){
+        return this.id.getConta();
     }
 
     public String getNome() {
