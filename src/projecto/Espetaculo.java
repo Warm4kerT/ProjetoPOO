@@ -94,7 +94,7 @@ public class Espetaculo {
 
     @Override
     public String toString() {
-        return "Espetaculo{" + "nome=" + nome + ", local=" + local + ", dia=" + dia + ", Realizador=" + Realizador.toString() + ", Atores=" + Atores.toString() + ", Staff=" + Staff.toString() + ", stats=" + stats.toString() + '}';
+        return "Espetaculo{" + "nome=" + nome + ", local=" + local + ", dia=" + dia + ", Realizador=" + Realizador.toString() + ", Atores=" + Atores.toString() + ", Staff=" + Staff.toString();
     }
     
     
