@@ -10,10 +10,23 @@ public class Data implements Serializable{
         this.ano=0;
     }
 
-    public Data(int dia, int mes, int ano) {
-        this.dia = dia;
-        this.mes = mes;
-        this.ano = ano;
+    public Data(int dia, int mes, int ano) throws DataErrada {
+        if(dia<=31 && 1<=dia){
+            this.dia = dia;
+        }else{
+            throw new DataErrada("O dia tem de ser entre 1 e 31!!");
+        }
+        if(mes<=12 && 1<=mes){
+            this.mes = mes;
+        }else{
+            throw new DataErrada("O mes tem de ser entre 1 e 12!!!");
+        }
+        if(((int)(Math.log10(ano) + 1))==4){
+            this.ano = ano;
+        }else{
+            throw new DataErrada("O ano tem de ter 4 algarismos!!!");
+        }
+        
     }
 
     public int getDia() {

@@ -6,8 +6,13 @@ import java.io.*;
 public class Projecto {
     public static Data novaData(){
         System.out.println("Insira a data por ordem Dia/Mes/Ano");
-        Data d=new Data(ler.umInt(),ler.umInt(),ler.umInt());
-        return d;
+        try{
+            Data d=new Data(ler.umInt(),ler.umInt(),ler.umInt());
+            return d;
+        }catch(DataErrada e){
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
     
     public static int searchID(ArrayList <Pessoa> lista, int id){
@@ -119,57 +124,32 @@ public class Projecto {
                                 v2=0;
                             break;
                             case 2:
-                                while(v3!=6){
-                                    System.out.println("1 - Nome\n2 - Idade\n3 - Salario\n4 - Data Contrato\n5 - Função\n6 - Exit");
-                                    v3=ler.umInt();
-                                    int aux=0,valida=0;
-                                    switch(v3){
-                                        case 1:
-                                            System.out.println("Insira o ID do Funcionário:");
-                                            aux=searchID(funcionarios,ler.umInt());
-                                            System.out.println("É este o Funcionário a modificar?\n"+funcionarios.get(aux).toString()+"\n1 - Sim\n2 - Não");
-                                            valida=ler.umInt();
-                                            if(valida==1){
-                                                System.out.println("Novo nome");
-                                                funcionarios.get(aux).setNome(ler.umaString());
-                                            }
-                                        break;
-                                        case 2:
-                                            System.out.println("Insira o ID do Funcionário:");
-                                            aux=searchID(funcionarios,ler.umInt());
-                                            System.out.println("É este o Funcionário a modificar?\n"+funcionarios.get(aux).toString()+"\n1 - Sim\n2 - Não");
-                                            valida=ler.umInt();
-                                            if(valida==1){
-                                                System.out.println("Novo Idade");
-                                                funcionarios.get(aux).setIdade(ler.umInt());
-                                            }
-                                        break;
-                                        case 3:
-                                            System.out.println("Insira o ID do Funcionário:");
-                                            aux=searchID(funcionarios,ler.umInt());
-                                            System.out.println("É este o Funcionário a modificar?\n"+funcionarios.get(aux).toString()+"\n1 - Sim\n2 - Não");
-                                            valida=ler.umInt();
-                                            if(valida==1){
-                                                System.out.println("Novo Salario");
-                                                funcionarios.get(aux).setSalario(ler.umDouble());
-                                            }
-                                        break;
-                                        case 4:
-                                            System.out.println("Insira o ID do Funcionário:");
-                                            aux=searchID(funcionarios,ler.umInt());
-                                            System.out.println("É este o Funcionário a modificar?\n"+funcionarios.get(aux).toString()+"\n1 - Sim\n2 - Não");
-                                            valida=ler.umInt();
-                                            if(valida==1){
-                                                System.out.println("Nova Data de Contrato");
-                                                funcionarios.get(aux).setContrato(novaData());
-                                            }
-                                        break;
-                                        case 5:
-                                            System.out.println("Insira o ID do Funcionário:");
-                                            aux=searchID(funcionarios,ler.umInt());
-                                            System.out.println("É este o Funcionário a modificar?\n"+funcionarios.get(aux).toString()+"\n1 - Sim\n2 - Não");
-                                            valida=ler.umInt();
-                                            if(valida==1){
+                                System.out.println("Insira o ID do Funcionário:");
+                                int aux=searchID(funcionarios,ler.umInt());
+                                System.out.println("É este o Funcionário a modificar?\n"+funcionarios.get(aux).toString()+"\n1 - Sim\n2 - Não");
+                                int valida=ler.umInt();
+                                if(valida==1){
+                                    while(v3!=6){    
+                                        System.out.println("1 - Nome\n2 - Idade\n3 - Salario\n4 - Data Contrato\n5 - Função\n6 - Exit");
+                                        v3=ler.umInt();
+                                        switch(v3){
+                                            case 1:
+                                                    System.out.println("Novo nome");
+                                                    funcionarios.get(aux).setNome(ler.umaString());
+                                            break;
+                                            case 2:
+                                                    System.out.println("Novo Idade");
+                                                    funcionarios.get(aux).setIdade(ler.umInt());
+                                            break;
+                                            case 3:
+                                                    System.out.println("Novo Salario");
+                                                    funcionarios.get(aux).setSalario(ler.umDouble());
+                                            break;
+                                            case 4:
+                                                    System.out.println("Nova Data de Contrato");
+                                                    funcionarios.get(aux).setContrato(novaData());
+                                            break;
+                                            case 5:
                                                 System.out.println("Nova Função");
                                                 System.out.println("1 - Ator\t2 - Realizador\t3 - Staff");
                                                 int f=ler.umInt();
@@ -185,10 +165,10 @@ public class Projecto {
                                                     break;
                                                 }
                                                 f=0;
-                                            }
-                                        break;
+                                            break;
+                                        }
+                                        valida=0;aux=0;
                                     }
-                                    valida=0;aux=0;
                                 }
                                 v3=0;
                             break;
@@ -224,11 +204,11 @@ public class Projecto {
                             break;
                             case 4:
                                 System.out.println("Insira o ID do Funcionario a eliminar");
-                                int aux=searchID(funcionarios,ler.umInt());
-                                System.out.println("É este o Funcionário a modificar?\n"+funcionarios.get(aux).toString()+"\n1 - Sim\n2 - Não");
-                                int valida=ler.umInt();
-                                if(valida==1){
-                                    funcionarios.remove(aux);
+                                int aux1=searchID(funcionarios,ler.umInt());
+                                System.out.println("É este o Funcionário a modificar?\n"+funcionarios.get(aux1).toString()+"\n1 - Sim\n2 - Não");
+                                int valida1=ler.umInt();
+                                if(valida1==1){
+                                    funcionarios.remove(aux1);
                                 }
                             break;
                         }
@@ -362,61 +342,36 @@ public class Projecto {
                                         break;
                                         
                                         case 2:
-                                            while(v8!=6){
-                                                System.out.println("1 - Vizualizações\n2 - Rating\n3 - Valor Ganho\n4 - Preço Bilhete\n5 - Duração\n6 - Exit");
-                                                v8=ler.umInt();
-                                                int valida=0,aux=0;
-                                                switch(v8){
-                                                    case 1:
-                                                        System.out.println("Insira o nome do espetáculo:");
-                                                        aux=searchEsp(espetaculos,ler.umaString());
-                                                        System.out.println("É este o espetáculo a modificar?\n"+espetaculos.get(aux).getNome()+"\n1 - Sim\n2 - Não");
-                                                        valida=ler.umInt();
-                                                        if(valida==1){
-                                                            System.out.println("Novo valor de vizualizações");
-                                                            espetaculos.get(aux).getStats().setViews(ler.umInt());
-                                                        }
-                                                    break;
-                                                    case 2:
-                                                        System.out.println("Insira o nome do espetáculo:");
-                                                        aux=searchEsp(espetaculos,ler.umaString());
-                                                        System.out.println("É este o espetáculo a modificar?\n"+espetaculos.get(aux).getNome()+"\n1 - Sim\n2 - Não");
-                                                        valida=ler.umInt();
-                                                        if(valida==1){
-                                                            System.out.println("Nova rating");
-                                                            espetaculos.get(aux).getStats().setRating(ler.umInt());
-                                                        }
-                                                    break;
-                                                    case 3:
-                                                        System.out.println("Insira o nome do espetáculo:");
-                                                        aux=searchEsp(espetaculos,ler.umaString());
-                                                        System.out.println("É este o espetáculo a modificar?\n"+espetaculos.get(aux).getNome()+"\n1 - Sim\n2 - Não");
-                                                        valida=ler.umInt();
-                                                        if(valida==1){
-                                                            System.out.println("Novo valor ganho");
-                                                            espetaculos.get(aux).getStats().setDinheiro(ler.umDouble());
-                                                        }
-                                                    break;
-                                                    case 4:
-                                                        System.out.println("Insira o nome do espetáculo:");
-                                                        aux=searchEsp(espetaculos,ler.umaString());
-                                                        System.out.println("É este o espetáculo a modificar?\n"+espetaculos.get(aux).getNome()+"\n1 - Sim\n2 - Não");
-                                                        valida=ler.umInt();
-                                                        if(valida==1){
-                                                            System.out.println("Novo Preço do Bilhete");
-                                                            espetaculos.get(aux).getStats().setBilhete(ler.umDouble());
-                                                        }
-                                                    break;
-                                                    case 5:
-                                                        System.out.println("Insira o nome do espetáculo:");
-                                                        aux=searchEsp(espetaculos,ler.umaString());
-                                                        System.out.println("É este o espetáculo a modificar?\n"+espetaculos.get(aux).getNome()+"\n1 - Sim\n2 - Não");
-                                                        valida=ler.umInt();
-                                                        if(valida==1){
-                                                            System.out.println("Nova duração do espetaculo");
-                                                            espetaculos.get(aux).getStats().setDuracao(ler.umDouble());
-                                                        }
-                                                    break;
+                                            System.out.println("Insira o nome do espetáculo:");
+                                            int aux=searchEsp(espetaculos,ler.umaString());
+                                            System.out.println("É este o espetáculo a modificar?\n"+espetaculos.get(aux).getNome()+"\n1 - Sim\n2 - Não");
+                                            int valida=ler.umInt();
+                                            if(valida==1){
+                                                while(v8!=6){
+                                                    System.out.println("1 - Vizualizações\n2 - Rating\n3 - Valor Ganho\n4 - Preço Bilhete\n5 - Duração\n6 - Exit");
+                                                    v8=ler.umInt();
+                                                    switch(v8){
+                                                        case 1:
+                                                                System.out.println("Novo valor de vizualizações");
+                                                                espetaculos.get(aux).getStats().setViews(ler.umInt());
+                                                        break;
+                                                        case 2:
+                                                                System.out.println("Nova rating");
+                                                                espetaculos.get(aux).getStats().setRating(ler.umInt());
+                                                        break;
+                                                        case 3:
+                                                                System.out.println("Novo valor ganho");
+                                                                espetaculos.get(aux).getStats().setDinheiro(ler.umDouble());
+                                                        break;
+                                                        case 4:
+                                                                System.out.println("Novo Preço do Bilhete");
+                                                                espetaculos.get(aux).getStats().setBilhete(ler.umDouble());
+                                                        break;
+                                                        case 5:
+                                                                System.out.println("Nova duração do espetaculo");
+                                                                espetaculos.get(aux).getStats().setDuracao(ler.umDouble());
+                                                        break;
+                                                    }
                                                 }
                                             }
                                         break;
@@ -606,6 +561,5 @@ public class Projecto {
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
-    }
-    
+    }  
 }
