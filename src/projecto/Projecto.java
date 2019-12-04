@@ -33,6 +33,25 @@ public class Projecto {
         }
         return i;
     }
+    
+    public static void printID(Espetaculo a,ArrayList <Pessoa> array){
+        int v;
+        System.out.println("Realizadores:");
+        for(int aux:a.getRealizador()){
+            v=searchID(array,aux);
+            System.out.println(array.get(v).getNome());
+        }
+        System.out.println("Atores:");
+        for(int aux:a.getAtores()){
+            v=searchID(array,aux);
+            System.out.println(array.get(v).getNome());
+        }
+        System.out.println("Staff:");
+        for(int aux:a.getStaff()){
+            v=searchID(array,aux);
+            System.out.println(array.get(v).getNome());
+        }
+    }
 
     public static void main(String[] args) {
         ArrayList <Pessoa> funcionarios=new ArrayList <Pessoa>();
@@ -43,11 +62,16 @@ public class Projecto {
            ObjectInputStream is=new ObjectInputStream(new FileInputStream("./Pessoas.dat"));
            funcionarios= (ArrayList <Pessoa>) is.readObject();
            contaID=(funcionarios.get(funcionarios.size()-1).getId());
-           ObjectInputStream is2=new ObjectInputStream(new FileInputStream("./Espetaculos.dat"));
-           espetaculos= (ArrayList <Espetaculo>) is2.readObject();
         }catch(IOException | ClassNotFoundException e){
             System.out.println(e.getMessage());
             contaID=0;
+        }
+        
+        try{
+            ObjectInputStream is=new ObjectInputStream(new FileInputStream("./Espetaculo.dat"));
+            espetaculos= (ArrayList <Espetaculo>) is.readObject();
+        }catch(IOException | ClassNotFoundException e){
+            System.out.println(e.getMessage());
         }
         
         
@@ -225,6 +249,8 @@ public class Projecto {
                                         case 1:
                                             for(Espetaculo aux:espetaculos){
                                                 System.out.println(aux.toString());
+                                                printID(aux,funcionarios);
+                                                
                                             }
                                         break;
                                         case 2:
@@ -233,20 +259,26 @@ public class Projecto {
                                             switch(f){
                                                 case 1:
                                                     for(Espetaculo aux:espetaculos){
-                                                        if("Lisboa".equalsIgnoreCase(aux.getLocal()))
+                                                        if("Lisboa".equalsIgnoreCase(aux.getLocal())){
                                                             System.out.println(aux.toString());
+                                                            printID(aux,funcionarios);
+                                                        }
                                                     }
                                                 break;
                                                 case 2:
                                                     for(Espetaculo aux:espetaculos){
-                                                        if("Porto".equalsIgnoreCase(aux.getLocal()))
+                                                        if("Porto".equalsIgnoreCase(aux.getLocal())){
                                                             System.out.println(aux.toString());
+                                                            printID(aux,funcionarios);
+                                                        }
                                                     }
                                                 break;
                                                 case 3:
                                                     for(Espetaculo aux:espetaculos){
-                                                        if("Funchal".equalsIgnoreCase(aux.getLocal()))
+                                                        if("Funchal".equalsIgnoreCase(aux.getLocal())){
                                                             System.out.println(aux.toString());
+                                                            printID(aux,funcionarios);
+                                                        }
                                                     }
                                                 break;
                                             }
@@ -256,8 +288,10 @@ public class Projecto {
                                             System.out.println("Insira o nome");
                                             String nome=ler.umaString();
                                             for(Espetaculo aux:espetaculos){
-                                                if(nome.equalsIgnoreCase(aux.getNome()))
+                                                if(nome.equalsIgnoreCase(aux.getNome())){
                                                     System.out.println(aux.toString());
+                                                    printID(aux,funcionarios);
+                                                }
                                             }
                                         break;
                                         
@@ -560,10 +594,15 @@ public class Projecto {
         try{
             ObjectOutputStream os=new ObjectOutputStream(new FileOutputStream("./Pessoas.dat"));
                 os.writeObject(funcionarios);
-            os.flush();
-            ObjectOutputStream os2=new ObjectOutputStream(new FileOutputStream("./Espetaculo.dat"));
-                os2.writeObject(espetaculos);
-            os2.flush();
+            os.flush();     
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+           ObjectOutputStream os=new ObjectOutputStream(new FileOutputStream("./Espetaculo.dat"));
+                os.writeObject(espetaculos);
+            os.flush(); 
         }catch(IOException e){
             System.out.println(e.getMessage());
         }

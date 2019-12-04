@@ -1,6 +1,8 @@
 package projecto;
 
-public class Estatistica{
+import java.io.Serializable;
+
+public class Estatistica implements Serializable{
     private int views, rating;
     private double dinheiro, bilhete, duracao;
 

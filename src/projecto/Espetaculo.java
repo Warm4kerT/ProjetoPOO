@@ -1,7 +1,8 @@
 package projecto;
+import java.io.Serializable;
 import java.util.*;
 
-public class Espetaculo {
+public class Espetaculo implements Serializable{
     private String nome, local;
     private Data dia;
     private ArrayList <Integer> Realizador, Atores, Staff;
@@ -91,10 +92,14 @@ public class Espetaculo {
     public void setStats(Estatistica stats) {
         this.stats = stats;
     }
+    
+    public void printFuncionarios(){
+        
+    }
 
     @Override
     public String toString() {
-        return "Espetaculo{" + "nome=" + nome + ", local=" + local + ", dia=" + dia + ", Realizador=" + Realizador.toString() + ", Atores=" + Atores.toString() + ", Staff=" + Staff.toString();
+        return "Espetaculo{" + "nome=" + nome + ", local=" + local + ", dia=" + dia;
     }
     
     
