@@ -1,6 +1,5 @@
 
 package projecto;
-import myinputs.*;
 import java.util.*;
 import java.io.*;
 
@@ -22,6 +21,14 @@ public class Projecto {
     public static int searchEsp(ArrayList <Espetaculo> lista, String nome){
         int i=0;
         while(!lista.get(i).getNome().equalsIgnoreCase(nome)){
+            ++i;
+        }
+        return i;
+    }
+    
+    public static int searchInt(ArrayList <Integer> lista, int id){
+        int i=0;
+        while(lista.get(i)!=id){
             ++i;
         }
         return i;
@@ -312,6 +319,9 @@ public class Projecto {
                                                                 System.out.println(aux.getStats().toString());
                                                         }
                                                     break;
+                                                    case 4:
+                                                        
+                                                    break;
 
                                                     }
                                             }
@@ -401,62 +411,90 @@ public class Projecto {
                             break;
                             
                             case 3:
-                                while(v9!=5){
-                                    System.out.println("1 - Modificar Nome\n2 - Modificar Local\n3 - Modificar Data\n4 - Modificar Participante\n5 - Exit");
-                                    v9=ler.umInt();
-                                    int aux=0,valida=0;
-                                    switch(v9){
-                                        case 1:
-                                            System.out.println("Insira o nome do espetáculo:");
-                                            aux=searchEsp(espetaculos,ler.umaString());
-                                            System.out.println("É este o espetáculo a modificar?\n"+espetaculos.get(aux).getNome()+"\n1 - Sim\n2 - Não");
-                                            valida=ler.umInt();
-                                            if(valida==1){
-                                                System.out.println("Novo nome");
-                                                espetaculos.get(aux).setNome(ler.umaString());
+                                int aux=0,valida=0;
+                                System.out.println("Insira o nome do espetáculo:");
+                                aux=searchEsp(espetaculos,ler.umaString());
+                                System.out.println("É este o espetáculo a modificar?\n"+espetaculos.get(aux).getNome()+"\n1 - Sim\n2 - Não");
+                                valida=ler.umInt();
+                                if(valida==1){
+                                    while(v9!=5){
+                                        System.out.println("1 - Modificar Nome\n2 - Modificar Local\n3 - Modificar Data\n4 - Modificar Participante\n5 - Exit");
+                                        v9=ler.umInt();
+                                            switch(v9){
+                                                case 1:
+                                                    System.out.println("Novo nome");
+                                                    espetaculos.get(aux).setNome(ler.umaString());
+                                                break;
+                                                case 2:
+                                                    System.out.println("Novo local");
+                                                    System.out.println("Locais\n 1 - Lisboa\t2 - Porto\t3 - Funchal");
+                                                    switch(ler.umInt()){
+                                                        case 1:
+                                                            espetaculos.get(aux).setLocal("Lisboa");
+                                                        break;
+                                                        case 2:
+                                                            espetaculos.get(aux).setLocal("Porto");
+                                                        break;
+                                                        case 3:
+                                                            espetaculos.get(aux).setLocal("Funchal");
+                                                        break;
+                                                    }
+                                                break;
+                                                case 3:
+                                                    System.out.println("Nova Data");
+                                                    espetaculos.get(aux).setDia(novaData());
+                                                break;
+                                                case 4:
+                                                    System.out.println("O que pretende modificar?\n1 - Realizador\t2 - Atores\t3 - Staff");
+                                                    switch(ler.umInt()){
+                                                        case 1:
+                                                            System.out.println("Pretende\n1 - Adicionar ou 2 - Remover");
+                                                            switch(ler.umInt()){
+                                                                case 1:
+                                                                    System.out.println("Insira o ID a adicionar:");
+                                                                    espetaculos.get(aux).getRealizador().add(ler.umInt());
+                                                                break;
+                                                                case 2:
+                                                                    System.out.println("Insira o ID a remover");
+                                                                    espetaculos.get(aux).getRealizador().remove(searchInt(espetaculos.get(aux).getRealizador(),ler.umInt()));
+                                                                break;
+                                                            }
+                                                        break;
+                                                        case 2:
+                                                            System.out.println("Pretende\n1 - Adicionar ou 2 - Remover");
+                                                            switch(ler.umInt()){
+                                                                case 1:
+                                                                    System.out.println("Insira o ID a adicionar:");
+                                                                    espetaculos.get(aux).getAtores().add(ler.umInt());
+                                                                break;
+                                                                case 2:
+                                                                    System.out.println("Insira o ID a remover");
+                                                                    espetaculos.get(aux).getAtores().remove(searchInt(espetaculos.get(aux).getAtores(),ler.umInt()));
+                                                                break;
+                                                            }
+                                                        break;
+                                                        case 3:
+                                                            System.out.println("Pretende\n1 - Adicionar ou 2 - Remover");
+                                                            switch(ler.umInt()){
+                                                                case 1:
+                                                                    System.out.println("Insira o ID a adicionar:");
+                                                                    espetaculos.get(aux).getStaff().add(ler.umInt());
+                                                                break;
+                                                                case 2:
+                                                                    System.out.println("Insira o ID a remover");
+                                                                    espetaculos.get(aux).getStaff().remove(searchInt(espetaculos.get(aux).getStaff(),ler.umInt()));
+                                                                break;
+                                                            }
+                                                        break;
+                                                    }
+                                                break;
                                             }
-                                        break;
-                                        case 2:
-                                            System.out.println("Insira o nome do espetáculo:");
-                                            aux=searchEsp(espetaculos,ler.umaString());
-                                            System.out.println("É este o espetáculo a modificar?\n"+espetaculos.get(aux).getNome()+"\n1 - Sim\n2 - Não");
-                                            valida=ler.umInt();
-                                            if(valida==1){
-                                                System.out.println("Novo local");
-                                                System.out.println("Locais\n 1 - Lisboa\t2 - Porto\t3 - Funchal");
-                                                switch(ler.umInt()){
-                                                    case 1:
-                                                        espetaculos.get(aux).setLocal("Lisboa");
-                                                    break;
-                                                    case 2:
-                                                        espetaculos.get(aux).setLocal("Porto");
-                                                    break;
-                                                    case 3:
-                                                        espetaculos.get(aux).setLocal("Funchal");
-                                                    break;
-                                                }
-                                            }
-                                        break;
-                                        case 3:
-                                            System.out.println("Insira o nome do espetáculo:");
-                                            aux=searchEsp(espetaculos,ler.umaString());
-                                            System.out.println("É este o espetáculo a modificar?\n"+espetaculos.get(aux).getNome()+"\n1 - Sim\n2 - Não");
-                                            valida=ler.umInt();
-                                            if(valida==1){
-                                                System.out.println("Nova Data");
-                                                espetaculos.get(aux).setDia(novaData());
-                                            }
-                                        break;
-                                        case 4:
-                                            
-                                        break;
                                     }
-                                }
-                                
-                                
+                                }           
                             break;
                             
                             case 4:
+                                int tempAux=0;
                                 Espetaculo novo=new Espetaculo();
                                 System.out.println("Insira o nome");
                                 novo.setNome(ler.umaString());
@@ -476,22 +514,25 @@ public class Projecto {
                                 System.out.println("Insira a data");
                                 novo.setDia(novaData());
                                 System.out.println("Quantos Realizadores a adicionar:");
+                                tempAux=ler.umInt();
                                 ArrayList<Integer> temp=new ArrayList<Integer>();
-                                for(int i=0;i<ler.umInt();++i){
+                                for(int i=0;i<tempAux;++i){
                                     System.out.println("Insira o id");
                                     temp.add(ler.umInt());
                                 }
                                 novo.setRealizador(temp);
                                 System.out.println("Quantos Atores a adicionar:");
+                                tempAux=ler.umInt();
                                 temp=new ArrayList<Integer>();
-                                for(int i=0;i<ler.umInt();++i){
+                                for(int i=0;i<tempAux;++i){
                                     System.out.println("Insira o id");
                                     temp.add(ler.umInt());
                                 }
                                 novo.setAtores(temp);
                                 System.out.println("Quantos Staffs a adicionar:");
+                                tempAux=ler.umInt();
                                 temp=new ArrayList<Integer>();
-                                for(int i=0;i<ler.umInt();++i){
+                                for(int i=0;i<tempAux;++i){
                                     System.out.println("Insira o id");
                                     temp.add(ler.umInt());
                                 }
