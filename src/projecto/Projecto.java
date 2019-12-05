@@ -7,36 +7,60 @@ public class Projecto {
     public static Data novaData(){
         System.out.println("Insira a data por ordem Dia/Mes/Ano");
         try{
-            Data d=new Data(ler.umInt(),ler.umInt(),ler.umInt());
+            Data d=new Data();
+            d.setDia(ler.umInt());
+            d.setMes(ler.umInt());
+            d.setAno(ler.umInt());
             return d;
         }catch(DataErrada e){
             System.out.println(e.getMessage());
+            return novaData();
         }
-        return null;
     }
     
     public static int searchID(ArrayList <Pessoa> lista, int id){
         int i=0;
-        while(lista.get(i).getId()!=id){
+        for(Pessoa aux:lista){
+            if(aux.getId()==id){
+                return i;
+            }
             ++i;
         }
-        return i;
+        if(i==lista.size()){
+            System.out.println("ID Inexistente!!");
+            return searchID(lista,ler.umInt());
+        }
+        return 0;
     }
     
     public static int searchEsp(ArrayList <Espetaculo> lista, String nome){
         int i=0;
-        while(!lista.get(i).getNome().equalsIgnoreCase(nome)){
+        for(Espetaculo aux:lista){
+            if(aux.getNome().equalsIgnoreCase(nome)){
+                return i;
+            }
             ++i;
         }
-        return i;
+        if(i==lista.size()){
+            System.out.println("Espetáculo Inexistente!!");
+            return searchEsp(lista,ler.umaString());
+        }
+        return 0;
     }
     
     public static int searchInt(ArrayList <Integer> lista, int id){
         int i=0;
-        while(lista.get(i)!=id){
+        for(int aux:lista){
+            if(aux==id){
+                return i;
+            }
             ++i;
         }
-        return i;
+        if(i==lista.size()){
+            System.out.println("ID Inexistente neste Espetáculo!!");
+            return searchInt(lista,ler.umInt());
+        }
+        return 0;
     }
     
     public static void printID(Espetaculo a,ArrayList <Pessoa> array){
@@ -339,8 +363,7 @@ public class Projecto {
 
                                                     }
                                             }
-                                        break;
-                                        
+                                        break;                                       
                                         case 2:
                                             System.out.println("Insira o nome do espetáculo:");
                                             int aux=searchEsp(espetaculos,ler.umaString());
